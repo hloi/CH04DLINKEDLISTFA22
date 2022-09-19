@@ -138,7 +138,7 @@ namespace KW {
         }
 
         iterator end() {
-            iterator return_value(this, nullptr);
+            iterator return_value(this, tail);
             return return_value;
         }
 
@@ -148,6 +148,20 @@ namespace KW {
         const_iterator end() const {
             const_iterator return_value(this, nullptr);
             return return_value;
+        }
+
+        void pop_front() {
+            if (head == NULL)
+                throw std::invalid_argument
+                        ("Attempt to call pop_front() on an empty list");
+            DNode* removed_node = head;
+            head = head->next;
+            delete removed_node;
+            if (head != NULL)
+                head->prev = NULL;
+            else
+                tail = NULL;
+            num_items--;
         }
 
         void pop_back() {
@@ -171,6 +185,22 @@ namespace KW {
                  ++itr) {
                 cout << *itr << endl;
             }
+        }
+
+        void printInfo2() {
+                for (list::iterator itr = end(); itr != begin();
+                     --itr) {
+                    cout << *itr << endl;
+                }
+            }
+
+
+        iterator get(int pos) {
+            iterator ibegin = begin();
+            for (int i=0; i<pos; i++) {
+                ++ibegin;
+            }
+            return ibegin;
         }
     };
 } // namespace kw

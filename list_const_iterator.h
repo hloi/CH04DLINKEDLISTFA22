@@ -99,12 +99,12 @@ decrement */
     }
 
 // Compare for equality.
-    bool operator==(const iterator &other) {
+    bool operator==(const const_iterator &other) {
         return current == other.current;
     }
 
     // Not equal
-    bool operator!=(const iterator &other) {
+    bool operator!=(const const_iterator &other) {
         return !operator==(other);
     }
 

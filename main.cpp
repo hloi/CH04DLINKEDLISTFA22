@@ -20,8 +20,18 @@ int main() {
     list<int> a_list;
     a_list.push_front(2);
     a_list.push_back(5);
+    a_list.push_back(8);
+    a_list.insert(a_list.get(2), 7);
 //    print_list<int>(a_list);
     a_list.printInfo();
+    cout << "------------" << endl;
+    a_list.printInfo2();
+//    a_list.pop_back();
+//    cout << "------------" << endl;
+//    a_list.printInfo();
+//    a_list.pop_front();
+//    cout << "------------" << endl;
+//    a_list.printInfo();
 
 
 
