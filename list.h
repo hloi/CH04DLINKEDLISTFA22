@@ -13,10 +13,27 @@ namespace KW {
 // Insert definition of nested class DNode here.
 #include "DNode.h"
 
+// Data fields
+/** A reference to the head of the list */
+            DNode *head;
+/** A reference to the end of the list */
+            DNode *tail;
+/** The size of the list */
+            int num_items;
+
+
     public:
 // Insert definition of nested class iterator here.
 //#include "list_iterator.h"
-/** Construct an empty list. */
+// Insert definition of nested class iterator here.
+#include "list_iterator.h"
+// Give iterator access to private members of list.
+
+#include "list_const_iterator.h"
+// Give iterator access to private members of list.
+            friend class const_iterator;
+            friend class iterator;
+
         list() {
             head = nullptr;
             tail = nullptr;
@@ -94,22 +111,41 @@ namespace KW {
             return iterator(this, new_node);
         }
 // Give iterator access to private members of list.
-        friend class iterator;
+//        friend class iterator;
 // Insert definition of nested class const_iterator here.
 //#include "list_const_iterator.h"
 
 // Give const_iterator access to private members of list.
-        friend class const_iterator;
+//        friend class const_iterator;
 
-    private:
-// Data fields
-/** A reference to the head of the list */
-        DNode *head;
-/** A reference to the end of the list */
-        DNode *tail;
-/** The size of the list */
-        int num_items;
+    // swap function for the list
+    void swap(list<Item_Type>& other) {
+            std::swap(head, other.head);
+            std::swap(tail, other.tail);
+            std::swap(num_items, other.num_items);
+        }
+        iterator begin() {
+            iterator return_value(this, head);
+            return return_value;
+        }
+
+        void pop_back() {
+            if (tail == nullptr) {
+                throw std::invalid_argument("Attempt to call pop_back() on an empty list.");
+            }
+            DNode* remove_node = tail;
+            tail = tail->prev;
+            delete remove_node;
+            if (tail != nullptr) {
+                tail->next = nullptr;
+            }
+            else {
+                head = nullptr;
+            }
+            num_items--;
+        }
+
 
     };
-}
+} // namespace kw
 #endif //CH04DLINKEDLISTFA22_LIST_H
