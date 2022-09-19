@@ -4,7 +4,10 @@
 
 #ifndef CH04DLINKEDLISTFA22_LIST_H
 #define CH04DLINKEDLISTFA22_LIST_H
+#include <iostream>
 
+using std::cout;
+using std::endl;
 
 namespace KW {
     template<typename Item_Type>
@@ -129,6 +132,24 @@ namespace KW {
             return return_value;
         }
 
+        const_iterator begin() const {
+            const_iterator return_value(this, head);
+            return return_value;
+        }
+
+        iterator end() {
+            iterator return_value(this, nullptr);
+            return return_value;
+        }
+
+        /** Return a const_iterator to the end of the list
+            @return a const_iterator to the end of the list
+         */
+        const_iterator end() const {
+            const_iterator return_value(this, nullptr);
+            return return_value;
+        }
+
         void pop_back() {
             if (tail == nullptr) {
                 throw std::invalid_argument("Attempt to call pop_back() on an empty list.");
@@ -145,7 +166,12 @@ namespace KW {
             num_items--;
         }
 
-
+        void printInfo() {
+            for (list::iterator itr = begin(); itr != end();
+                 ++itr) {
+                cout << *itr << endl;
+            }
+        }
     };
 } // namespace kw
 #endif //CH04DLINKEDLISTFA22_LIST_H

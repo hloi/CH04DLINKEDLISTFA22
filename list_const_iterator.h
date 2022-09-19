@@ -53,7 +53,7 @@ is enforced by the compiler.
     now references the previous position
     @throws std::invalid_argument If this iterator is at begin
     */
-    iterator &operator--() {
+    const_iterator &operator--() {
         if (current == parent->head)
             throw std::invalid_argument("Attempt to move before begin()");
         if (current == nullptr) // Past last element.
@@ -63,12 +63,21 @@ is enforced by the compiler.
         return *this;
     }
 
+    const_iterator operator++() {
+// Make a copy of the current value.
+        const_iterator return_value = *this;
+// Advance self forward.
+        ++(*this);
+// Return old value.
+        return return_value; /* Return the value prior to
+increment */
+    }
 /** Postfix increment operator.
 @return A copy of this iterator before being advanced
 */
-    iterator operator++(int) {
+    const_iterator operator++(int) {
 // Make a copy of the current value.
-        iterator return_value = *this;
+        const_iterator return_value = *this;
 // Advance self forward.
         ++(*this);
 // Return old value.
@@ -79,7 +88,7 @@ increment */
 /** Postfix decrement operator.
 @return A copy of this iterator before moving backward
 */
-    iterator operator--(int) {
+    const_iterator operator--(int) {
 // Make a copy of the current value.
         iterator return_value = *this;
 // Move self backward.
