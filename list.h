@@ -138,7 +138,7 @@ namespace KW {
         }
 
         iterator end() {
-            iterator return_value(this, tail);
+            iterator return_value(this, nullptr);
             return return_value;
         }
 
@@ -188,8 +188,10 @@ namespace KW {
         }
 
         void printInfo2() {
-                for (list::iterator itr = end(); itr != begin();
-                     --itr) {
+                const const_iterator begin2 = begin();
+                const const_iterator end2 = end();
+                for (const list::const_iterator itr = begin(); itr != end();
+                     ++itr) {
                     cout << *itr << endl;
                 }
             }

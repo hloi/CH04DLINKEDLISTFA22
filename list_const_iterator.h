@@ -12,7 +12,7 @@ class const_iterator {
 private:
 // Data fields
 /** A reference to the parent list */
-    list<Item_Type> *parent;
+    const list<Item_Type> *parent;
 /** A pointer to the current DNode */
     typename list<Item_Type>::DNode *current;
 
@@ -23,7 +23,7 @@ can create one from scratch.
 @param my_parent A reference to the list
 @param position A pointer to the current DNode
 */
-    const_iterator(list<Item_Type> *my_parent, DNode *position) :
+    const_iterator(const list<Item_Type> *my_parent, DNode *position) :
             parent(my_parent), current(position) {}
 
 public:
@@ -63,14 +63,11 @@ is enforced by the compiler.
         return *this;
     }
 
-    const_iterator operator++() {
-// Make a copy of the current value.
-        const_iterator return_value = *this;
-// Advance self forward.
-        ++(*this);
-// Return old value.
-        return return_value; /* Return the value prior to
-increment */
+    const_iterator& operator++() {
+        if (current == NULL)
+            throw std::invalid_argument("Attempt to advance past end()");
+        current = current->next;
+        return *this;
     }
 /** Postfix increment operator.
 @return A copy of this iterator before being advanced
@@ -90,7 +87,7 @@ increment */
 */
     const_iterator operator--(int) {
 // Make a copy of the current value.
-        iterator return_value = *this;
+        const_iterator return_value = *this;
 // Move self backward.
         --(*this);
 // Return old value.

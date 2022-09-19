@@ -5,6 +5,7 @@ using namespace std;
 
 using KW::list;
 
+// declare the const list and use it with the const_iterator
 template <typename T>
 void print_list(const list<T>& a_list) {
     typename list<T>::const_iterator iter = a_list.begin();
@@ -21,11 +22,11 @@ int main() {
     a_list.push_front(2);
     a_list.push_back(5);
     a_list.push_back(8);
-    a_list.insert(a_list.get(2), 7);
-//    print_list<int>(a_list);
-    a_list.printInfo();
-    cout << "------------" << endl;
-    a_list.printInfo2();
+
+    print_list(a_list);
+
+
+//    a_list.printInfo();
 //    a_list.pop_back();
 //    cout << "------------" << endl;
 //    a_list.printInfo();
