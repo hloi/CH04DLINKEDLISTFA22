@@ -43,13 +43,14 @@ public:
         // should test size equals to zero
     }
 
+    // how to test list_const_iterator
     void testConstList() {
         //Use TS_ASSERT_EQUALS(Result, ExpResult) to test your functions.
         list<int> a_list;
         a_list.push_front(2);
         a_list.push_back(5);
         a_list.push_back(8);
-        const list<int> a_list2 = a_list;  // make a const list
+        const list<int> a_list2 = a_list;  // make a shallow copy of const list (did not call the assignment operator)
 
         // test list_const_iterator
         // const_iterator begin should be called
@@ -61,6 +62,59 @@ public:
         a_list.pop_front();
 
     }
+    // how to test assignment operator
+    void testAssignmentOperator() {
+        //Use TS_ASSERT_EQUALS(Result, ExpResult) to test your functions.
+        list<int> a_list;
+        a_list.push_front(2);
+        a_list.push_back(5);
+        a_list.push_back(8);
+        list<int> a_list2;
+        a_list2 = a_list;  // call assignment operator
+
+        TS_ASSERT_EQUALS(*a_list.begin(), 2);
+        a_list.pop_front();
+        TS_ASSERT_EQUALS(*a_list.begin(), 5);
+        a_list.pop_front();
+        TS_ASSERT_EQUALS(*a_list.begin(), 8);
+        a_list.pop_front();
+        // should test size equals to zero
+
+        TS_ASSERT_EQUALS(*a_list2.begin(), 2);
+        a_list2.pop_front();
+        TS_ASSERT_EQUALS(*a_list2.begin(), 5);
+        a_list2.pop_front();
+        TS_ASSERT_EQUALS(*a_list2.begin(), 8);
+        a_list2.pop_front();
+        // should test size equals to zero
+    }
+
+    // how to test copy constructor
+    void testCopyConstructor() {
+        //Use TS_ASSERT_EQUALS(Result, ExpResult) to test your functions.
+        list<int> a_list;
+        a_list.push_front(2);
+        a_list.push_back(5);
+        a_list.push_back(8);
+        list<int> a_list2(a_list);
+        TS_ASSERT_EQUALS(*a_list.begin(), 2);
+        a_list.pop_front();
+        TS_ASSERT_EQUALS(*a_list.begin(), 5);
+        a_list.pop_front();
+        TS_ASSERT_EQUALS(*a_list.begin(), 8);
+        a_list.pop_front();
+        // should test size equals to zero
+
+        TS_ASSERT_EQUALS(*a_list2.begin(), 2);
+        a_list2.pop_front();
+        TS_ASSERT_EQUALS(*a_list2.begin(), 5);
+        a_list2.pop_front();
+        TS_ASSERT_EQUALS(*a_list2.begin(), 8);
+        a_list2.pop_front();
+        // should test size equals to zero
+
+    }
+
 };
 #endif /* NEWCXXTEST_H */
 

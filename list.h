@@ -44,6 +44,7 @@ namespace KW {
         }
         /** Construct a copy of a list. */
         list(const list<Item_Type>& other) {
+            cout << "copy constructor called." << endl;
             head = nullptr;
             tail = nullptr;
             num_items = 0;
@@ -65,11 +66,12 @@ namespace KW {
 
         /** Assign the contents of one list to another. */
         list<Item_Type>& operator=(const list<Item_Type>& other) {
-// Make a copy of the other list.
+            cout << "assignment operator called." << endl;
+            // Make a copy of the other list.
             list<Item_Type> temp_copy(other);  // calling copy constructor
-// Swap contents of self with the copy.
+            // Swap contents of self with the copy.
             swap(temp_copy);
-// Return -- upon return the copy will be destroyed.
+            // Return -- upon return the copy will be destroyed.
             return *this;
         }
 
@@ -157,6 +159,7 @@ namespace KW {
                 throw std::invalid_argument
                         ("Attempt to call pop_front() on an empty list");
             DNode* removed_node = head;
+            cout << removed_node->data << endl;
             head = head->next;
             delete removed_node;
             if (head != NULL)
