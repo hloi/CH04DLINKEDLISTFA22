@@ -23,8 +23,8 @@ int main() {
     a_list.push_back(5);
     a_list.push_back(8);
 
-    print_list(a_list);
 
+    print_list(a_list);
 
 //    a_list.printInfo();
 //    a_list.pop_back();

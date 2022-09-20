@@ -133,6 +133,7 @@ namespace KW {
         }
 
         const_iterator begin() const {
+            cout << "const_iterator begin()" << endl;
             const_iterator return_value(this, head);
             return return_value;
         }
@@ -146,6 +147,7 @@ namespace KW {
             @return a const_iterator to the end of the list
          */
         const_iterator end() const {
+            cout << "const_iterator end()" << endl;
             const_iterator return_value(this, nullptr);
             return return_value;
         }
@@ -187,22 +189,16 @@ namespace KW {
             }
         }
 
-        void printInfo2() {
-                const const_iterator begin2 = begin();
-                const const_iterator end2 = end();
-                for (const list::const_iterator itr = begin(); itr != end();
-                     ++itr) {
-                    cout << *itr << endl;
-                }
-            }
-
 
         iterator get(int pos) {
-            iterator ibegin = begin();
-            for (int i=0; i<pos; i++) {
-                ++ibegin;
+            if (pos < this->num_items) {
+                iterator ibegin = begin();
+                for (int i = 0; i < pos; i++) {
+                    ++ibegin;
+                }
+                return ibegin;
             }
-            return ibegin;
+            return nullptr;
         }
     };
 } // namespace kw
